@@ -1,0 +1,115 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="x-ua-compatible" content="ie=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Express Analytics</title>
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap">
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css" rel="stylesheet">
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.19.1/css/mdb.min.css" rel="stylesheet">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.0.0/animate.min.css">
+
+	
+	<link rel="shortcut icon" type="image/png" href="{% static 'neo4j/logo-png-type.png' %}"/>
+	<link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.css">
+	<link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
+	<link rel="stylesheet" href="{% static 'neo4j/style.css' %}">
+	
+	<meta name="viewport" content="width=device-width, initial-scale = 1.0">
+		
+</head>
+
+<body>
+
+	
+	<nav class="navbar navbar-expand-lg font-small blue-grey lighten-5" style="height: 65px;">
+		<a class="navbar-brand" href="{% url 'home' %}"><img src="{% static 'neo4j/logo-png-type.png' %}" style="height:25%;width:25%;" title="companylogo"></a>
+		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+		  <span class="navbar-toggler-icon"></span>
+		</button>
+	  
+		<div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+		  <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+			
+		  </ul>
+		  <form class="form-inline my-2 my-lg-0" method = 'POST' action = "{% url 'home' %}">
+
+			<div class='search-buttons' >
+
+				<!-- search in all-->
+				{% for radio in radios %}
+				<div class="custom-control custom-radio custom-control-inline" >
+					
+					<input type="radio"
+					{% if radio == search_type %}
+						checked
+					{% endif %}
+					class="custom-control-input" id="search_{{radio}}" name="search_type" value="{{ radio }}">
+					<label class="custom-control-label" for="search_{{radio}}" >{{ radio }}</label>
+				</div>
+				{% endfor %}
+			</div>
+
+			<input type="text" id="search_key"
+			{% if search_key %}
+				value='{{search_key}}'
+			{% endif %}
+			class="form-control mr-sm-2" name='search_key' placeholder="Search">
+			<button class="btn btn-outline-grey my-2 my-sm-0" type="submit">Search</button>
+			
+		  </form>
+		</div>
+	  </nav>
+	
+
+
+	  
+
+
+	{% block content %}
+	{% endblock %}
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.4/umd/popper.min.js"></script>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.19.1/js/mdb.min.js"></script>
+	<script src="https://unpkg.com/swiper/swiper-bundle.js"></script>
+	<script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+	
+	<script>
+		ip = ''
+		async function bring(target, rec, event, rec_type){
+			return new Promise((resolve, reject)=>{
+				name = ip
+				if(name!=''){
+					
+				
+					var http = new XMLHttpRequest()
+					url = `https://8jfr28ykd4.execute-api.us-west-1.amazonaws.com/stage-test?name=${name}&target-movie=${target}&rec-movie=${rec}&event-type=${event}&rec-type=${rec_type}`
+					http.open("GET", url, true)
+					http.send()
+					
+				}
+				console.log(target, rec, event, rec_type, ip) 
+				
+				
+			})
+		}
+	
+		$.getJSON("https://api.ipify.org?format=json", 
+		function(data) { 
+			ip=data.ip; 
+			console.log(ip)
+			onclick="bring('{{ PAGE_NAME }}', 'None', 'PAGE_OPEN', 'None')"
+		}) 
+		
+	</script> 
+	
+	
+	
+</body>
+
+</html>

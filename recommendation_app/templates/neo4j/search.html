@@ -1,0 +1,190 @@
+{% extends 'neo4j/base.html' %}
+{% load static %}
+{% block content %}
+
+
+<div id="mainbody">
+	<div id="particles-js1">
+	<br><br>
+	  <h1 style= "color: floralwhite; margin-left: 1em" ><strong><b>SEARCH RESULTS</b></strong></h1>
+		<div class="card-list">
+	
+			{% for movie in products %}
+			<div class="card movie-card">
+				<a href='{% url "detail" movie.productid %}'>
+					<img class="card-img-top" id="card-image" onclick="bring('{{ movie.productname }}', 'None', 'PAGE_OPEN', 'None')" src="{{ movie.poster }}" onerror=this.src="{% static 'neo4j/default-movie.jpg' %}">
+					<div class="card-body">
+						<h5 class="card-title-search"><a>{{ movie.productname }}</a></h5>
+				
+						<p class="card-text">Manufacturer: {{ movie.manufacturer }}</p>
+						<p class="card-text">Style: {{ movie.style }}</p>
+						<p class="card-text"><b><b>Price: {{ movie.price }}</b></b></p>
+					</div>
+				</a>
+			</div>
+			{% endfor %}
+		</div>	
+				
+	</div>
+		
+	<script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+	<script>
+		particlesJS.load('particles-js1', "{% static 'neo4j/particles.json' %}", function() {
+		console.log('callback - particles.js1 config loaded');
+		});
+	</script>
+
+
+</div>
+
+
+
+<!-- Footer -->
+<footer class="page-footer font-small blue-grey lighten-5" id = "index-footer">
+
+	<div style="background-color: #525252;">
+	  <div class="container">
+  
+		<!-- Grid row-->
+		<div class="row py-4 d-flex align-items-center">
+  
+		  <!-- Grid column -->
+		  <div class="col-md-6 col-lg-5 text-center text-md-left mb-4 mb-md-0">
+			<h6 class="mb-0">Get connected with us on social networks!</h6>
+		  </div>
+		  <!-- Grid column -->
+  
+		  <!-- Grid column -->
+		  <div class="col-md-6 col-lg-7 text-center text-md-right">
+  
+			<!-- Facebook -->
+			<a class="fb-ic" href = "https://www.facebook.com/expana/">
+			  <i class="fab fa-facebook-f white-text mr-4"> </i>
+			</a>
+			<!-- Twitter -->
+			<a class="tw-ic" href = "https://twitter.com/expranalytics">
+			  <i class="fab fa-twitter white-text mr-4"> </i>
+			</a>
+			<!-- Google +-->
+			<a class="youtube-ic" href = "https://www.youtube.com/channel/UC4gfApL4ib2spXOARqe0cHw">
+			  <i class="fab fa-youtube white-text mr-4"> </i>
+			</a>
+			<!--Linkedin -->
+			<a class="li-ic" href = "https://www.linkedin.com/company/express-analytics/">
+			  <i class="fab fa-linkedin-in white-text mr-4"> </i>
+			</a>
+			
+		  </div>
+		  <!-- Grid column -->
+  
+		</div>
+		<!-- Grid row-->
+  
+	  </div>
+	</div>
+  
+	<!-- Footer Links -->
+	<div class="container text-center text-md-left mt-5">
+  
+	  <!-- Grid row -->
+	  <div class="row mt-3 dark-grey-text">
+  
+		<!-- Grid column -->
+		<div class="col-md-3 col-lg-4 col-xl-3 mb-4">
+  
+		  <!-- Content -->
+		  <h6 class="text-uppercase font-weight-bold">Express Analytics</h6>
+		  <hr class="red mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
+		  <p>Express Analytics data driven solutions helps businesses maximize the value of every customer. 
+			  We’ve two things going for us – proven expertise in analytics, and a clients list of global companies, 
+			  including some Fortune 500 ones. 
+			  You give us your data, we will give you real value in return.</p>
+  
+		</div>
+		<!-- Grid column -->
+  
+		<!-- Grid column -->
+		<div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
+  
+		  <!-- Links -->
+		  <h6 class="text-uppercase font-weight-bold">Services</h6>
+		  <hr class="red mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
+		  <p>
+			<a class="dark-grey-text" href="https://expressanalytics.com/analytics-consulting/customer-analytics/">Customer Analytics</a>
+		  </p>
+		  <p>
+			<a class="dark-grey-text" href="https://expressanalytics.com/analytics-consulting/marketing-analytics/">Marketing Analysis</a>
+		  </p>
+		  <p>
+			<a class="dark-grey-text" href="https://expressanalytics.com/analytics-consulting/data-visualization/">Data Visualization</a>
+		  </p>
+		  <p>
+			<a class="dark-grey-text" href="https://expressanalytics.com/analytics-consulting/business-intelligence-analytics-services/">Business Intelligence Services</a>
+		  </p>
+		  <p>
+			<a class="dark-grey-text" href="https://expressanalytics.com/customer-data-platform/">Customer Data Platform</a>
+		  </p>
+  
+		</div>
+		<!-- Grid column -->
+  
+		<!-- Grid column -->
+		<div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
+  
+		  <!-- Links -->
+		  <h6 class="text-uppercase font-weight-bold">Useful links</h6>
+		  <hr class="red mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
+		  <p>
+			<a class="dark-grey-text" href="https://expressanalytics.com/case-studies-1023-2019/">Case Studies</a>
+		  </p>
+		  <p>
+			<a class="dark-grey-text" href="https://expressanalytics.com/knowledge-base/white-papers/">White Papers</a>
+		  </p>
+		  <p>
+			<a class="dark-grey-text" href="https://expressanalytics.com/knowledge-base/e-books/">e-Books</a>
+		  </p>
+		  <p>
+			<a class="dark-grey-text" href="https://expressanalytics.com/webinar/">Webinar</a>
+		  </p>
+		  <p>
+			<a class="dark-grey-text" href="https://expressanalytics.com/blog/">Blog</a>
+		  </p>
+  
+		</div>
+		<!-- Grid column -->
+  
+		<!-- Grid column -->
+		<div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
+  
+		  <!-- Links -->
+		  <h6 class="text-uppercase font-weight-bold">Contact</h6>
+		  <hr class="red mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
+		  <p>
+			<i class="fas fa-home mr-3"></i> 300, Spectrum Centre Drive Suite 400,Irvine,
+			California- 92618
+		</p> 
+		  <p>
+			<i class="fas fa-envelope mr-3"></i> info@expressanalytics.net</p>
+		  <p>
+		
+		</div>
+		<!-- Grid column -->
+  
+	  </div>
+	  <!-- Grid row -->
+  
+	</div>
+	<!-- Footer Links -->
+  
+	<!-- Copyright -->
+	<div class="footer-copyright text-center text-black-50 py-3">© 2020 Copyright:
+	  <a class="dark-grey-text" href="https://expressanalytics.com/"> Express Analytics</a>
+	</div>
+	<!-- Copyright -->
+  
+  </footer>
+  <!-- Footer -->
+
+
+{% endblock %}
+

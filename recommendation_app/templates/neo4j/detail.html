@@ -1,0 +1,501 @@
+ {% extends 'neo4j/base.html' %}
+{% load static %}
+{% block content %}
+
+
+
+<div id="mainbody">
+	<div id="particles-js">
+        <div id="detailbody">
+            
+	
+
+            <div class="container">
+                <br>
+                <div class="card" >
+                    <div class="card-body" id="detail-card-body">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <a href='{% url "detail" products.productid %}'>
+                            <img class="card-img-top" id="detail-image" onclick="bring('{{ products.productname }}', 'None', 'PAGE_OPEN', 'None')" src="{{ products.poster }}" onerror=this.src="{% static 'neo4j/default-movie.jpg' %}">
+                        </a>
+                        </div>
+                    
+                        <div class="col-md-8" >
+                            <br>
+                            <h1 class="text-center">
+                               <strong><b>{{products.productname}}</b></strong>
+                            </h1>
+                            <br>
+                         
+                            <h7>
+                                Manufacturer: {{products.manufacturer}}
+                            </h7>
+                            <br><br>
+                            <h7>Style: {{products.style}}</h7>
+							<br><br>
+                            <h7>Finish: {{products.finish}}</h7>
+							<br><br>
+                            <h7>Price: {{products.price}}</h7>
+                        
+                        </div>
+                    
+                    </div>
+                </div>
+            </div>
+
+            </div>
+             
+             
+          
+
+
+            <br><br><br><br><br><br>
+			
+			
+			  <!-- Swiper -->
+			  
+		    <div class="netflix"> 
+			 <h3 style= "color: white; margin: 0px 0px 40px 10px;"><strong><b>PRODUCTS SIMILAR TO THE SELECTED PRODUCT</b></strong></h3>
+			  <div class="swiper-container" style = "width: 98%;
+													height: 100%;">
+				<div class="swiper-wrapper">
+				 {% for movie in algo_one %}
+				
+				  <div class="swiper-slide" style = "{text-align: center;
+													  font-size: 18px;
+													  background: #fff;
+													  display: -webkit-box;
+													  display: -ms-flexbox;
+													  display: -webkit-flex;
+													  display: flex;
+													  -webkit-box-pack: center;
+													  -ms-flex-pack: center;
+													  -webkit-justify-content: center;
+													  justify-content: center;
+													  -webkit-box-align: center;
+													  -ms-flex-align: center;
+													  -webkit-align-items: center;
+													  align-items: center; opacity:0.95;
+													  transition: 250ms all;}
+													  ">
+					<a href='{% url "detail" movie.productid %}'>
+                      <img class="card-img-top" id="card-image" style = "height:225px; width:150px;" onclick="bring('{{ movie.productname }}', 'None', 'PAGE_OPEN', 'None')" src="{{ movie.poster }}" onerror=this.src="{% static 'neo4j/default-movie.jpg' %}">
+					  <div class="card-body">
+			
+						<h5 class="card-title-search" style = "font-size: 2.5vh;"><a>{{ movie.productname }}</a></h5>
+					
+						
+						<div class="likedislike" style = "display: flex; margin: 0px 0px 0px 25px;"> 
+							<a class="like" style = "margin: 0px 0px 0px 0px;
+														font-weight: normal;
+														text-align: center;
+														vertical-align: middle;
+														cursor: pointer;
+														background: white;
+														border: 1px solid transparent;
+														white-space: nowrap;
+														padding: 6px 12px;
+														font-size: 14px;
+														line-height: 1.428571429;">
+														<div class="icon" style="margin: 0px 0px 0px 0px;" onclick="getElementById('WCB_{{movie.productid}}').style.color='#00C998', getElementById('WCB_{{movie.productid}}').style.color='black', bring('{{PAGE_NAME}}','{{ movie.productname }}', 'LIKE', 'WCB')"><span class="fa fa-thumbs-up" id="WCB_{{movie.productid}}"></span></div>
+							
+							</a>
+							<br>
+							<a class="dislike" style = "margin: 0px 0px 0px 0px;
+														font-weight: normal;
+														text-align: center;
+														vertical-align: middle;
+														cursor: pointer;
+														background: white;
+														border: 1px solid transparent;
+														white-space: nowrap;
+														padding: 6px 12px;
+														font-size: 14px;
+														line-height: 1.428571429;">
+														<div class="icon" style="margin: 0px 0px 0px 0px;" onclick="getElementById('WCB_{{movie.productid}}').style.color='#C90061', getElementById('WCB_{{movie.productid}}').style.color='black', bring('{{PAGE_NAME}}','{{ movie.productname }}', 'DISLIKE', 'WCB')"><span class="fa fa-thumbs-down" id="WCB_{{movie.productid}}"></span></div>
+								
+							</a>
+						</div>  
+
+
+						
+					  </div>
+					</a>
+				  </div>
+				  {% endfor %}
+				</div>
+				
+				<div class="swiper-button-next"></div>
+				<div class="swiper-button-prev"></div>
+				
+				</div>
+			  </div>
+			  
+			  
+		
+				
+			  <!-- Swiper -->
+			  
+		    <div class="netflix"> 
+			 <h3 style= "color: white; margin: 60px 0px 40px 10px;"><strong><b>PRODUCTS SIMILAR TO THE SELECTED PRODUCT</b></strong></h3>
+			  <div class="swiper-container" style = "width: 98%;
+													height: 100%;">
+				<div class="swiper-wrapper">
+				 {% for movie in algo_one %}
+				
+				  <div class="swiper-slide" style = "{text-align: center;
+													  font-size: 18px;
+													  background: #fff;
+													  display: -webkit-box;
+													  display: -ms-flexbox;
+													  display: -webkit-flex;
+													  display: flex;
+													  -webkit-box-pack: center;
+													  -ms-flex-pack: center;
+													  -webkit-justify-content: center;
+													  justify-content: center;
+													  -webkit-box-align: center;
+													  -ms-flex-align: center;
+													  -webkit-align-items: center;
+													  align-items: center; opacity:0.95;
+													  transition: 250ms all;}
+													  ">
+					<a href='{% url "detail" movie.productid %}'>
+                      <img class="card-img-top" id="card-image" style = "height:225px; width:150px;" onclick="bring('{{ movie.productname }}', 'None', 'PAGE_OPEN', 'None')" src="{{ movie.poster }}" onerror=this.src="{% static 'neo4j/default-movie.jpg' %}">
+					  <div class="card-body">
+			
+						<h5 class="card-title-search" style = "font-size: 2.5vh;"><a>{{ movie.productname }}</a></h5>
+					
+						
+						<div class="likedislike" style = "display: flex; margin: 0px 0px 0px 25px;"> 
+							<a class="like" style = "margin: 0px 0px 0px 0px;
+														font-weight: normal;
+														text-align: center;
+														vertical-align: middle;
+														cursor: pointer;
+														background: white;
+														border: 1px solid transparent;
+														white-space: nowrap;
+														padding: 6px 12px;
+														font-size: 14px;
+														line-height: 1.428571429;">
+														<div class="icon" style="margin: 0px 0px 0px 0px;" onclick="getElementById('WCB_{{movie.productid}}').style.color='#00C998', getElementById('WCB_{{movie.productid}}').style.color='black', bring('{{PAGE_NAME}}','{{ movie.productname }}', 'LIKE', 'WCB')"><span class="fa fa-thumbs-up" id="WCB_{{movie.productid}}"></span></div>
+							
+							</a>
+							<br>
+							<a class="dislike" style = "margin: 0px 0px 0px 0px;
+														font-weight: normal;
+														text-align: center;
+														vertical-align: middle;
+														cursor: pointer;
+														background: white;
+														border: 1px solid transparent;
+														white-space: nowrap;
+														padding: 6px 12px;
+														font-size: 14px;
+														line-height: 1.428571429;">
+														<div class="icon" style="margin: 0px 0px 0px 0px;" onclick="getElementById('WCB_{{movie.productid}}').style.color='#C90061', getElementById('WCB_{{movie.productid}}').style.color='black', bring('{{PAGE_NAME}}','{{ movie.productname }}', 'DISLIKE', 'WCB')"><span class="fa fa-thumbs-down" id="WCB_{{movie.productid}}"></span></div>
+								
+							</a>
+						</div>  
+
+
+						
+					  </div>
+					</a>
+				  </div>
+				  {% endfor %}
+				</div>
+				
+				<div class="swiper-button-next"></div>
+				<div class="swiper-button-prev"></div>
+				
+				</div>
+			  </div>	
+	
+			  
+			  
+			  
+		
+			  
+			  
+			  <!-- Swiper -->
+			  
+		    <div class="netflix"> 
+			 <h3 style= "color: white; margin: 60px 0px 40px 10px;"><strong><b>PRODUCTS SIMILAR TO THE SELECTED PRODUCT</b></strong></h3>
+			  <div class="swiper-container" style = "width: 98%;
+													height: 100%;">
+				<div class="swiper-wrapper">
+				 {% for movie in algo_one %}
+				
+				  <div class="swiper-slide" style = "{text-align: center;
+													  font-size: 18px;
+													  background: #fff;
+													  display: -webkit-box;
+													  display: -ms-flexbox;
+													  display: -webkit-flex;
+													  display: flex;
+													  -webkit-box-pack: center;
+													  -ms-flex-pack: center;
+													  -webkit-justify-content: center;
+													  justify-content: center;
+													  -webkit-box-align: center;
+													  -ms-flex-align: center;
+													  -webkit-align-items: center;
+													  align-items: center; opacity:0.95;
+													  transition: 250ms all;}
+													  ">
+					<a href='{% url "detail" movie.productid %}'>
+                      <img class="card-img-top" id="card-image" style = "height:225px; width:150px;" onclick="bring('{{ movie.productname }}', 'None', 'PAGE_OPEN', 'None')" src="{{ movie.poster }}" onerror=this.src="{% static 'neo4j/default-movie.jpg' %}">
+					  <div class="card-body">
+			
+						<h5 class="card-title-search" style = "font-size: 2.5vh;"><a>{{ movie.productname }}</a></h5>
+					
+						
+						<div class="likedislike" style = "display: flex; margin: 0px 0px 0px 25px;"> 
+							<a class="like" style = "margin: 0px 0px 0px 0px;
+														font-weight: normal;
+														text-align: center;
+														vertical-align: middle;
+														cursor: pointer;
+														background: white;
+														border: 1px solid transparent;
+														white-space: nowrap;
+														padding: 6px 12px;
+														font-size: 14px;
+														line-height: 1.428571429;">
+														<div class="icon" style="margin: 0px 0px 0px 0px;" onclick="getElementById('WCB_{{movie.productid}}').style.color='#00C998', getElementById('WCB_{{movie.productid}}').style.color='black', bring('{{PAGE_NAME}}','{{ movie.productname }}', 'LIKE', 'WCB')"><span class="fa fa-thumbs-up" id="WCB_{{movie.productid}}"></span></div>
+							
+							</a>
+							<br>
+							<a class="dislike" style = "margin: 0px 0px 0px 0px;
+														font-weight: normal;
+														text-align: center;
+														vertical-align: middle;
+														cursor: pointer;
+														background: white;
+														border: 1px solid transparent;
+														white-space: nowrap;
+														padding: 6px 12px;
+														font-size: 14px;
+														line-height: 1.428571429;">
+														<div class="icon" style="margin: 0px 0px 0px 0px;" onclick="getElementById('WCB_{{movie.productid}}').style.color='#C90061', getElementById('WCB_{{movie.productid}}').style.color='black', bring('{{PAGE_NAME}}','{{ movie.productname }}', 'DISLIKE', 'WCB')"><span class="fa fa-thumbs-down" id="WCB_{{movie.productid}}"></span></div>
+								
+							</a>
+						</div>  
+
+
+						
+					  </div>
+					</a>
+				  </div>
+				  {% endfor %}
+				</div>
+				
+				<div class="swiper-button-next"></div>
+				<div class="swiper-button-prev"></div>
+				
+				</div>
+			  </div>			  
+			  
+			  
+			
+			  <!-- Swiper JS -->
+			  <script src="https://unpkg.com/swiper/swiper-bundle.js"></script>
+			  <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+
+			  <!-- Initialize Swiper -->
+			  <script>
+				var swiper = new Swiper('.swiper-container', {
+				  slidesPerView: 4,
+				  spaceBetween: 10,
+				  slidesPerGroup: 4,
+				        navigation: {
+							nextEl: '.swiper-button-next',
+							prevEl: '.swiper-button-prev',
+						  },
+				});
+			  </script>
+			
+			<!-- Swiper -->
+		
+
+
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+		<script>
+		$(function () {
+			 $(".like").click(function () {
+				 var input = $(this).find('.qty1');
+				 input.val(parseInt(input.val())+ 1);
+			 });
+
+			 $(".dislike").click(function () {
+				 var input = $(this).find('.qty2');
+				 input.val(input.val() - 1);
+			 });
+		});
+		</script>	
+			
+        </div>
+	</div>
+	<script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+	<script>
+		particlesJS.load('particles-js', "{% static 'neo4j/particles.json' %}", function() {
+		console.log('callback - particles.js config loaded');
+		});
+	</script>
+
+	
+</div>
+
+
+
+<!-- Footer -->
+<footer class="page-footer font-small blue-grey lighten-5" id="detail-footer">
+
+	<div style="background-color: #525252;">
+	  <div class="container">
+  
+		<!-- Grid row-->
+		<div class="row py-4 d-flex align-items-center">
+  
+		  <!-- Grid column -->
+		  <div class="col-md-6 col-lg-5 text-center text-md-left mb-4 mb-md-0">
+			<h6 class="mb-0">Get connected with us on social networks!</h6>
+		  </div>
+		  <!-- Grid column -->
+  
+		  <!-- Grid column -->
+		  <div class="col-md-6 col-lg-7 text-center text-md-right">
+  
+			<!-- Facebook -->
+			<a class="fb-ic" href = "https://www.facebook.com/expana/">
+			  <i class="fab fa-facebook-f white-text mr-4"> </i>
+			</a>
+			<!-- Twitter -->
+			<a class="tw-ic" href = "https://twitter.com/expranalytics">
+			  <i class="fab fa-twitter white-text mr-4"> </i>
+			</a>
+			<!-- Google +-->
+			<a class="youtube-ic" href = "https://www.youtube.com/channel/UC4gfApL4ib2spXOARqe0cHw">
+			  <i class="fab fa-youtube white-text mr-4"> </i>
+			</a>
+			<!--Linkedin -->
+			<a class="li-ic" href = "https://www.linkedin.com/company/express-analytics/">
+			  <i class="fab fa-linkedin-in white-text mr-4"> </i>
+			</a>
+			
+		  </div>
+		  <!-- Grid column -->
+  
+		</div>
+		<!-- Grid row-->
+  
+	  </div>
+	</div>
+  
+	<!-- Footer Links -->
+	<div class="container text-center text-md-left mt-5">
+  
+	  <!-- Grid row -->
+	  <div class="row mt-3 dark-grey-text">
+  
+		<!-- Grid column -->
+		<div class="col-md-3 col-lg-4 col-xl-3 mb-4">
+  
+		  <!-- Content -->
+		  <h6 class="text-uppercase font-weight-bold">Express Analytics</h6>
+		  <hr class="red mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
+		  <p>Express Analytics data driven solutions helps businesses maximize the value of every customer. 
+			  We’ve two things going for us – proven expertise in analytics, and a clients list of global companies, 
+			  including some Fortune 500 ones. 
+			  You give us your data, we will give you real value in return.</p>
+  
+		</div>
+		<!-- Grid column -->
+  
+		<!-- Grid column -->
+		<div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
+  
+		  <!-- Links -->
+		  <h6 class="text-uppercase font-weight-bold">Services</h6>
+		  <hr class="red mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
+		  <p>
+			<a class="dark-grey-text" href="https://expressanalytics.com/analytics-consulting/customer-analytics/">Customer Analytics</a>
+		  </p>
+		  <p>
+			<a class="dark-grey-text" href="https://expressanalytics.com/analytics-consulting/marketing-analytics/">Marketing Analysis</a>
+		  </p>
+		  <p>
+			<a class="dark-grey-text" href="https://expressanalytics.com/analytics-consulting/data-visualization/">Data Visualization</a>
+		  </p>
+		  <p>
+			<a class="dark-grey-text" href="https://expressanalytics.com/analytics-consulting/business-intelligence-analytics-services/">Business Intelligence Services</a>
+		  </p>
+		  <p>
+			<a class="dark-grey-text" href="https://expressanalytics.com/customer-data-platform/">Customer Data Platform</a>
+		  </p>
+  
+		</div>
+		<!-- Grid column -->
+  
+		<!-- Grid column -->
+		<div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
+  
+		  <!-- Links -->
+		  <h6 class="text-uppercase font-weight-bold">Useful links</h6>
+		  <hr class="red mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
+		  <p>
+			<a class="dark-grey-text" href="https://expressanalytics.com/case-studies-1023-2019/">Case Studies</a>
+		  </p>
+		  <p>
+			<a class="dark-grey-text" href="https://expressanalytics.com/knowledge-base/white-papers/">White Papers</a>
+		  </p>
+		  <p>
+			<a class="dark-grey-text" href="https://expressanalytics.com/knowledge-base/e-books/">e-Books</a>
+		  </p>
+		  <p>
+			<a class="dark-grey-text" href="https://expressanalytics.com/webinar/">Webinar</a>
+		  </p>
+		  <p>
+			<a class="dark-grey-text" href="https://expressanalytics.com/blog/">Blog</a>
+		  </p>
+  
+		</div>
+		<!-- Grid column -->
+  
+		<!-- Grid column -->
+		<div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
+  
+		  <!-- Links -->
+		  <h6 class="text-uppercase font-weight-bold">Contact</h6>
+		  <hr class="red mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
+		  <p>
+			<i class="fas fa-home mr-3"></i> 300, Spectrum Centre Drive Suite 400,Irvine,
+			California- 92618
+		</p> 
+		  <p>
+			<i class="fas fa-envelope mr-3"></i> info@expressanalytics.net</p>
+		  <p>
+		
+		</div>
+		<!-- Grid column -->
+  
+	  </div>
+	  <!-- Grid row -->
+  
+	</div>
+	<!-- Footer Links -->
+  
+	<!-- Copyright -->
+	<div class="footer-copyright text-center text-black-50 py-3">© 2020 Copyright:
+	  <a class="dark-grey-text" href="https://expressanalytics.com/"> Express Analytics</a>
+	</div>
+	<!-- Copyright -->
+  
+  </footer>
+  <!-- Footer -->
+
+ 
+{% endblock %}
